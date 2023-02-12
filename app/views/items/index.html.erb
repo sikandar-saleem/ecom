@@ -1,0 +1,24 @@
+<div class="row  justify-content-around" id ='1' onclik=''>
+  <% if @items.size > 0 %>
+    <% @items.each do |item| %>
+      <div class="col-lg-4 mt-4">
+        <div class="card shadow index-card-width">
+          <div class="card-body">
+            <% if item.image.attached? %>
+              <%= image_tag item.image, class:"index-card-img" %>
+            <% else %>
+              <img src="skelton.jpg" class="index-card-img"/>
+            <% end %>
+            <div class="text-center">
+              <h4 class="card-title mt-2"><%= item.title%></h4>
+              <p class="card-text">Rs. <%= item.price%></p>
+              <%= link_to "Add to cart", orders_path({ id: item.id }), method: :post, class: "btn btn-warning shadow text-dark btn-sm", remote: true %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <h1 class="text-danger text-center mt-5">No Item Found</h1>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+<h2>Welcome <%= current_user&.full_name %> <span class="text-primary"> [ Cart. ] </span></h2>
+<div id="notice">
+</div>
+<div id='items-table'>
+  <%= render "carts/cart_table" %>
+</div>
+
+

@@ -1,0 +1,29 @@
+<div class="row justify-content-between">
+  <div class="col-lg-2">
+    <div class="card bg-success text-white text-center">
+      <h5 class="card-body">Completed</h5>
+      <span class="display-6 "><%= @order_group_count["completed"] || 0 %></span>
+    </div>
+  </div>
+
+  <div class="col-lg-2">
+    <div class="card bg-danger text-white text-center">
+      <h5 class="card-body">Canceled</h5>
+      <span class="display-6 "><%= @order_group_count["canceled"] || 0 %></span>
+    </div>
+  </div>
+
+  <div class="col-lg-2">
+    <div class="card bg-info text-white text-center">
+      <h5 class="card-body">Paid</h5>
+      <span class="display-6 "><%= @order_group_count["paid"] || 0 %></span>
+    </div>
+  </div>
+
+  <div class="col-lg-2">
+    <div class="card bg-dark text-white text-center">
+      <h5 class="card-body">Ordered</h5>
+      <span class="display-6 "><%= @order_group_count["orderd"] || 0 %></span>
+    </div>
+  </div>
+</div>

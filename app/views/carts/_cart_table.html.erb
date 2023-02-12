@@ -1,0 +1,42 @@
+<% if @user_cart_items.size > 0 %>
+  <hr/>
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Sub-Total</th>
+        <th>Remove</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <% total = 0%>
+        <% @user_cart_items.each do |cart_item| %>
+          <tr>
+              <% total = total + cart_item['price'] * cart_item['quantity'] %>
+              <td><%= cart_item['title'] %></td>
+              <td>
+                <%= link_to '-', item_detail_path({ id: cart_item['id'], quantity: cart_item['quantity'] - 1 }), class:"btn btn-secondary btn-sm mb-1", method: :put, remote: true %>
+                <input type="number" min="1" value="<%= cart_item['quantity'] %>" class="w-25" readonly id="<%= cart_item['id'] %>"/>
+                <%= link_to '+',  item_detail_path({ id: cart_item['id'], quantity: cart_item['quantity'] + 1 }), class:"btn btn-secondary btn-sm mb-1", method: :put, remote: true %>
+
+              </td>
+              <td> <%= cart_item['price'] %></td>
+              <td><%= cart_item['price'] * cart_item['quantity']%></td>
+              <td><%= link_to 'Remove', item_detail_path(cart_item['id']), class: "btn btn-danger btn-sm", method: :delete, data: { confirm: 'Are you sure?' }, remote: true %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+
+  <hr/>
+  <h3 class="mt-5">Total - Rs. <%= total %></h3>
+  <%= link_to "Place Order", order_path({id:1, category: 'order', total:total}), method: :put,  class: "btn btn-primary btn-sm" %>
+
+  <% else %>
+    <hr />
+    <h1 class="mt-5 text-danger" >Your Cart is empty.</h1>
+    <%= link_to "Shope more", items_path, class:"btn btn-primary btn-sm" %>
+  <% end %>

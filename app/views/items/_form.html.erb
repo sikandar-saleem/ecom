@@ -1,0 +1,40 @@
+<%= form_with(model: @item , :multipart => true, local: true) do |form| %>
+  <%= render "layouts/error_messages", obj: item %>
+
+  <div class="form-group">
+    <%= form.label "Title *"%>
+    <%= form.text_field :title, class: "form-control"%>
+  </div>
+
+  <div class="form-group mt-2">
+    <%= form.label "Price *" %>
+    <%= form.number_field :price, class: "form-control"  %>
+  </div>
+
+  <div class="form-group mt-2">
+    <%= form.label "Categories *" %><br/>
+    <%= collection_check_boxes(:item, :category_ids, Category.all, :id, :name, include_hidden: false) %>
+  </div>
+
+  <div class="form-group mt-2">
+    <% if item&.image&.attached? %>
+      <td><%= image_tag item.image, class:"form-img" %></td>
+     <% end %><br/>
+    <%= form.label "Image * " %>
+    <%= form.file_field :image, class: "form-control" %>
+  </div>
+
+  <%= form.radio_button :status, 'active', class: "mt-3" %>
+  <%= label :status_active, 'Active' %>
+  <%= form.radio_button :status, 'retired' %>
+  <%= label :status_retired, 'Retired' %>
+
+  <div class="form-group mt-2">
+    <%= form.label "Description *" %>
+    <%= form.text_area :description, class: "form-control" %>
+  </div>
+
+  <div class="form-group mt-2">
+    <%= form.submit class:"btn btn-primary btn-sm" %>
+  </div>
+<% end %>

@@ -1,0 +1,37 @@
+<h2>Welcome <%= current_user.full_name %> <span class="text-primary"> [ Order History. ] </span></h2>
+
+<% if @orders.size > 0 %>
+  <hr/>
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Sr No.</th>
+        <th>Order ID</th>
+        <th>Created By</th>
+        <th>Date Time</th>
+        <th>Details</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+        <% @orders.each.with_index do |order, i| %>
+          <tr>
+            <td><%= i+1 %></td>
+            <td><%= order.id %></td>
+            <td><%= current_user.full_name%></td>
+            <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <td><%= link_to "Detail", order, class: "btn btn-primary btn-sm" %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <hr/>
+
+<% else %>
+  <hr />
+  <h1 class="mt-5 text-danger" >You did not order anything yet.</h1>
+  <%= link_to "Shope more", items_path, class:"btn btn-primary btn-sm" %>
+<% end %>
+
+

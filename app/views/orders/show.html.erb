@@ -1,0 +1,39 @@
+<% if @order_items.size > 0%>
+  <h2>Welcome <%= current_user.full_name %> <span class="text-primary"> [ Order Details. ] </span></h2>
+
+  <hr/>
+  <table class="table table-hover table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Sub-Total</th>
+        <th>Datetime</th>
+        <th>Status</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <% @order_items.each do |item| %>
+          <tr>
+              <td><%= item['title'] %></td>
+              <td><%= item['quantity'] %></td>
+              <td><%= item['price'] %></td>
+              <td><%= item['price'] * item['quantity']%></td>
+              <td><%= item['updated_at'].strftime("%Y-%m-%d %H:%M") %></td>
+              <td><span class="badge rounded-pill bg-warning"><%= item['status'].upcase_first%></span></td>
+              <td><%= link_to "View", item_path(item.id) %></td>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <div class="text-center mt-5">
+    <h4>Total Rs.  <small><%= @order_items[0]&.total %></small></h4>
+  </div>
+<% else %>
+  <h4 class="text-center">Order Not Exist.</h4>
+<% end %>
+
+

@@ -1,0 +1,12 @@
+<%= form_with(model: category, local: true) do |form| %>
+  <%= render "layouts/error_messages", obj: category %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="actions mt-2">
+    <%= form.submit class:"btn btn-primary btn-sm" %>
+  </div>
+<% end %>

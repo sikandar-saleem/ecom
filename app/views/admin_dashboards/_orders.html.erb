@@ -1,0 +1,48 @@
+<%= render  'admin_dashboards/status_count' %>
+
+<table class="table table-hover table-bordered mt-2">
+  <thead class="table-dark">
+    <tr>
+      <th>Sr No.</th>
+      <th>Order ID</th>
+      <th>Purchaser Name</th>
+      <th>Purchaser Email</th>
+      <th>Date Time</th>
+      <th>Status</th>
+      <th>Action</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each.with_index do |order, i| %>
+      <tr>
+        <td><%= i+1 %></td>
+        <td><%= order.id %></td>
+        <td><%= order.full_name%></td>
+        <td><%= order.email%></td>
+        <td><%= order.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><span class="badge rounded-pill bg-warning"><%= order['status'].upcase_first%></span></td>
+        <td>
+
+        <% if order.orderd? || order.paid? %>
+          <%= link_to "Cancel", order_status_update_path({ id: order.id, status: :canceled}), method: :put, class: "btn btn-danger btn-sm", remote: true %>
+        <% end %>
+
+        <% if order.orderd? %>
+          <%= link_to "Pay", order_status_update_path({ id: order.id, status: :paid}), method: :put, class: "btn btn-primary btn-sm", remote: true%>
+        <% end %>
+
+        <% if order.paid? %>
+          <%= link_to "Complete", order_status_update_path({ id: order.id, status: :completed}), method: :put, class: "btn btn-info btn-sm", remote: true %>
+        <% end %>
+
+        <% if order.completed? || order.canceled? %>
+          <strong><%= order['status'].upcase_first %></strong>
+        <% end %>
+        </td>
+        <td><%= link_to "View", admin_dashboard_path(order.id), class: "btn btn-info btn-sm" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
