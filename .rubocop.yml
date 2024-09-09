@@ -1,0 +1,138 @@
+# .rubocop.yml
+
+inherit_gem:
+  rubocop-rails: config/default.yml
+  rubocop-rspec: config/default.yml
+  rubocop-factory_bot: config/default.yml
+
+# Specify the gems that provide additional RuboCop configurations
+
+require:
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+  NewCops: enable
+  Exclude:
+    - "config/**/*"
+    - "vendor/**/*"
+    - "bin/**/*"
+    - "app/views/**/*"
+
+# Configuration parameters: AllowedMethods, AllowedPatterns.
+Metrics/CyclomaticComplexity:
+  Max: 25
+
+# Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns.
+Metrics/MethodLength:
+  Max: 30
+  Exclude:
+    - "spec/**/*"
+    - "bin/*"
+    - "lib/**/*"
+    - "db/migrate/*"
+    - "app/models/concerns/ransack/searchable.rb"
+    - "app/services/externals/hubspot_data/franchise_import_processor.rb"
+
+# Configuration parameters: AllowedMethods, AllowedPatterns.
+Metrics/PerceivedComplexity:
+  Max: 20
+  Exclude:
+    - "app/models/franchise.rb"
+
+Style/OptionalBooleanParameter:
+  Exclude:
+    - "app/services/externals/hubspot_data/franchise_import_processor.rb"
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - "app/services/externals/hubspot_data/franchise_export_processor.rb"
+
+Layout/LineLength:
+  Max: 130
+
+# Metrics/ClassLength cop settings
+Metrics/ClassLength:
+  Max: 300
+  Enabled: true
+
+# Style/Documentation cop settings
+Style/Documentation:
+  Enabled: false
+
+# Metrics/BlockLength cop settings
+Metrics/BlockLength:
+  Exclude:
+    - "config/**/*.rb"
+    - "db/schema.rb"
+    - "app/models/concerns/ransack/searchable.rb"
+
+# Naming/FileName cop settings
+Naming/FileName:
+  Include:
+    - "*.rb"
+
+# Lint/UnusedMethodArgument cop settings
+Lint/UnusedMethodArgument:
+  Enabled: true
+  Exclude:
+    - "spec/**/*"
+
+Lint/ShadowedException:
+  Exclude:
+    - "app/services/externals/hubspot_data/franchise_data_processor.rb"
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+Style/HashSyntax:
+  Enabled: true
+  EnforcedShorthandSyntax: never
+
+RSpec/Rails/HaveHttpStatus:
+  Enabled: true
+
+Naming/BlockForwarding:
+  EnforcedStyle: explicit
+
+Style/ArgumentsForwarding:
+  UseAnonymousForwarding: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+Rspec/RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/ImplicitSubject:
+  EnforcedStyle: require_implicit
+
+Lint/MissingSuper:
+  Enabled: false
+
+RSpec/DescribedClass:
+  EnforcedStyle: explicit
+  SkipBlocks: true
+
+Metrics/AbcSize:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/AnyInstance:
+  Enabled: false

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333333;
+      }
+      .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      .summary-table th,
+      .summary-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #dddddd;
+      }
+      .summary-table th {
+        background-color: #f8f8f8;
+        font-weight: bold;
+      }
+      .total {
+        font-weight: bold;
+        color: #333333;
+        text-align: right;
+      }
+      .footer {
+        margin-top: 20px;
+        font-size: 12px;
+        color: #777777;
+      }
+      .footer a {
+        color: #007bff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

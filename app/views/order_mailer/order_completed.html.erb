@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Order Completed Successfully!</h1>
+  <p>Hi <%= @order.customer.first_name %>,</p>
+  <p>
+    Thank you for your purchase. Your order has been completed successfully.
+    Below is the summary of your order:
+  </p>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Unit Price</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Tax</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order.order_items.each do |order_item| %>
+        <tr>
+          <td><%= order_item.item.name %></td>
+          <td><%= order_item.item.price %></td>
+          <td><%= order_item.quantity %></td>
+          <td>$<%= order_item.price %></td>
+          <td>$<%= order_item.tax %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" class="total">Total Price:</td>
+        <td class="total" colspan="4">$<%= @order.total_price %></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <p>Thanks again for shopping with us!</p>
+
+  <div class="footer">
+    <p>&copy; 2024 Agnos Inc. All rights reserved.</p>
+  </div>
+</div>
