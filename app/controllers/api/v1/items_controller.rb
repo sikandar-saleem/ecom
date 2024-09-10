@@ -1,16 +1,11 @@
 # frozen_string_literal: true
 
-module Api
-  module V1
-    class ItemsController < ApplicationController
-      def index
-        items = Item.available
-
-        render json: {
-          data: { items: items },
-          message: 'Items fetched successfully!'
-        }, status: :ok
-      end
-    end
+class Api::V1::ItemsController < BaseController
+  # ----------------------------------------------------------------------------
+  # GET: http://localhost:3000/api/v1/items
+  # ----------------------------------------------------------------------------
+  def index
+    items = Item.available
+    success_response(message: 'Items fetched successfully!', data: { items: items })
   end
 end

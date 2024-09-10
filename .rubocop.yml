@@ -136,3 +136,5 @@ RSpec/NestedGroups:
 
 RSpec/AnyInstance:
   Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false

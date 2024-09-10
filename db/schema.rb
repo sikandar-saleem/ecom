@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_181112) do
     t.integer "quantity", null: false
     t.float "price", null: false
     t.float "tax", default: 0.0, null: false
+    t.bigint "free_with_id"
     t.bigint "order_id"
     t.bigint "item_id"
     t.datetime "created_at", null: false

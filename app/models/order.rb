@@ -29,10 +29,20 @@ class Order < ApplicationRecord
   # --------------------------------------------------------------------------------------------------------
 
   def order_total
+    # Find all order_items where the item is free with another item
+    free_items = order_items.joins(:item).where.not(items: { free_with_id: nil })
+
+    # Filter out free items only if their associated 'free_with_id' item exists in the order
+    free_item_ids_to_exclude = free_items.select do |order_item|
+      order_items.exists?(item_id: order_item.item.free_with_id)
+    end.map(&:id)
+
+    # Calculate the total price, excluding the price of free items
     order_items
-      .joins(:item)
-      .where(items: { free_with_id: nil })
-      .pick(Arel.sql('SUM(order_items.price + order_items.tax)'))&.round(2) || 0.0
+      .where.not(id: free_item_ids_to_exclude) # Exclude free items if their "free" condition is met
+      .sum('order_items.price + order_items.tax') # Sum the price and tax for all valid items
+      .to_f
+      .round(2)
   end
 
   def update_stock

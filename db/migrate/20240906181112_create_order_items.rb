@@ -6,6 +6,7 @@ class CreateOrderItems < ActiveRecord::Migration[7.1]
       t.integer :quantity, null: false
       t.float :price, null: false
       t.float :tax, null: false, default: 0.0
+      t.bigint :free_with_id
 
       t.references :order
       t.references :item

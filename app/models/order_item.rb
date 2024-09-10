@@ -19,12 +19,10 @@ class OrderItem < ApplicationRecord
   private
 
   def calculate_price_and_tax
-    free_item_present = order.order_items.exists?(item_id: item.free_with_id)
-
     discount = (item.discount_percentage * item.price) / 100
-    final_price = item.free_with_id.present? && free_item_present ? 0.0 : item.price - discount
 
-    self.price = (final_price * quantity)&.round(2)
+    self.free_with_id = item.free_with_id
+    self.price = ((item.price - discount) * quantity)&.round(2)
     self.tax = ((item.tax_rate * price) / 100)&.round(2)
   end
 
